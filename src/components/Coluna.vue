@@ -1,12 +1,16 @@
 <template>
     <div class="principal d-flex w-auto">
-        <h2>coluna</h2>
+        <h2>{{ titulo }}</h2>
     </div>
 </template>
 
 <script>
 export default{
-    name:"Coluna"
+    name:"Coluna",
+
+    props:{
+        titulo:String,
+    }
 }
 </script>
 
