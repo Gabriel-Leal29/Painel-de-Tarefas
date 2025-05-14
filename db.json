@@ -1,0 +1,37 @@
+{
+  "columns": [
+    { "id": 1, "title": "A Fazer" },
+    { "id": 2, "title": "Fazendo" },
+    { "id": 3, "title": "Concluído" }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Estudar Vue.js",
+      "description": "Revisar componentes e ciclo de vida",
+      "dueDate": "2025-05-20",
+      "columnId": 1
+    },
+    {
+      "id": 2,
+      "title": "Montar layout com Bootstrap",
+      "description": "Criar grid do painel de tarefas",
+      "dueDate": "2025-05-15",
+      "columnId": 1
+    },
+    {
+      "id": 3,
+      "title": "Criar componentes de tarefa",
+      "description": "Separar TaskCard.vue e TaskForm.vue",
+      "dueDate": "2025-05-16",
+      "columnId": 2
+    },
+    {
+      "id": 4,
+      "title": "Testar integração com json-server",
+      "description": "Fazer requisições GET e POST com Axios",
+      "dueDate": "2025-05-14",
+      "columnId": 3
+    }
+  ]
+}
