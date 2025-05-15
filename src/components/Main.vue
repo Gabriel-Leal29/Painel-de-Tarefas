@@ -1,8 +1,7 @@
 <template>
     <main class="d-flex justify-content-center">
         <section class="painel d-flex p-4 mt-4 rounded row">
-
-            <Coluna v-for="coluna in colunas" :key="coluna.id"
+            <cardTarefa v-for="coluna in colunas" :key="coluna.id"
             :titulo="coluna.title"
             :tarefas="pegarTarefas(coluna.id)"
             />
@@ -26,14 +25,14 @@ main {
 </style>
 
 <script>
-import Coluna from "./Coluna.vue"
+import cardTarefa from "./CardTarefa.vue"
 import axios from "axios"
 
 export default {
     name: "Main",
 
     components: {
-        Coluna,
+        cardTarefa,
     },
 
     data() {
