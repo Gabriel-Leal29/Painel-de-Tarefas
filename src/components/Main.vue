@@ -1,8 +1,11 @@
 <template>
     <main class="d-flex justify-content-center">
-        <section class="painel d-flex p-4 mt-4 rounded">
+        <section class="painel d-flex p-4 mt-4 rounded row">
 
-            <Coluna v-for="(coluna,id) in colunas" :key="id" :titulo="coluna.title"/>
+            <Coluna v-for="coluna in colunas" :key="coluna.id"
+            :titulo="coluna.title"
+            :tarefas="pegarTarefas(coluna.id)"
+            />
 
         </section>
     </main>
@@ -41,28 +44,32 @@ export default {
     },
 
     methods: {
-        async getColunas() {
+        async getDados(){
             try {
-                const resp = await axios.get("http://localhost:3000/columns");
-                this.colunas = resp.data;
+                const nomeColunas = await axios.get("http://localhost:3000/columns");
+                this.colunas = nomeColunas.data;
+
+                const tarefas = await axios.get("http://localhost:3000/tasks");
+                this.tarefas = tarefas.data;
             }catch(erro){
-                console.log("Erro ao carregas as colunas: "+e);
+                console.log("Erro ao carregas os dados: "+erro);
             }
         },
 
-        async getTarefas(){
-            try{
-                const resp = axios.get("http://localhost:3000/tasks");
-                this.tarefas = resp;
-            }catch(erro){
-                console.log("Erro ao pegar as tarefas: "+e);
+        pegarTarefas(idColuna){
+            let tarefasDaColuna = [];
+
+            for(let i=0;i<this.tarefas.length;i++){
+                if(this.tarefas[i].columnId==idColuna){
+                    tarefasDaColuna.push(this.tarefas[i]);
+                }
             }
+            return tarefasDaColuna;
         }
     },
 
     mounted(){
-        this.getColunas();
-        this.getTarefas();
+        this.getDados();
     }
 }
 

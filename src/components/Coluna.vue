@@ -1,6 +1,9 @@
 <template>
-    <div class="principal d-flex w-auto">
+    <div class="principal w-auto col-auto">
         <h2>{{ titulo }}</h2>
+        <p v-for="tarefa in tarefas" :key="tarefa.id">
+            {{ tarefa.description }}
+        </p>
     </div>
 </template>
 
@@ -10,6 +13,12 @@ export default{
 
     props:{
         titulo:String,
+        tarefas:Array,
+    },
+
+    data(){
+        return{
+        }
     }
 }
 </script>
