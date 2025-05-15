@@ -32,6 +32,13 @@
       "description": "Fazer requisições GET e POST com Axios",
       "dueDate": "2025-05-14",
       "columnId": 3
+    },
+    {
+      "id": 5,
+      "title": "Teste tarefa 1",
+      "description": "teste tarefa 1 descricao",
+      "dueDate": "2025-05-14",
+      "columnId": 1
     }
   ]
 }
