@@ -2,11 +2,12 @@
     <section class="principal text-center rounded col-auto">
         <h2>{{ titulo }}</h2>
 
-        <p class="border border-1 rounded p-2" v-for="tarefa in tarefas" :key="tarefa.id"
-         @click="abrirModal(tarefa)">
+        <p class="border border-1 rounded p-2" v-for="tarefa in tarefas" :key="tarefa.id" @click="abrirModal(tarefa)">
             {{ tarefa.title }}
         </p>
 
+
+        <!-- MODAL -->
         <div class="modal fade" id="ModalTarefa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
             ref="modalTarefa">
             <div class="modal-dialog modal-dialog-centered">
@@ -22,16 +23,15 @@
                         <div class="mb-3 row">
                             <label for="tituloTarefa" class="col-sm-2 col-form-label">Título:</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control" id="tituloTarefa"
-                                    :value="tarefaModal.title" v-model="novoTitle">
+                                <input type="text" class="form-control" id="tituloTarefa" v-model="dadosTarefaEditar.title">
                             </div>
                         </div>
                         <!--Descricao da tarefa-->
                         <div class="mb-3 row">
                             <label for="tituloTarefa" class="col-sm-2 col-form-label">Descrição:</label>
                             <div class="col-sm-10">
-                                <input type="text" readonly class="form-control" id="tituloTarefa"
-                                    :value="tarefaModal.description" v-model="novaDescription">
+                                <input type="text" class="form-control" id="tituloTarefa"
+                                    v-model="dadosTarefaEditar.description">
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Remover
                         </button>
-                        <button type="button" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="editarTarefa()">Salvar</button>
                     </div>
                 </div>
             </div>
@@ -62,9 +62,7 @@ export default {
     data() {
         return {
             tarefaModal: {},
-            novoTitle:"",
-            novaDescription:"",
-
+            dadosTarefaEditar:{}
         };
     },
 
@@ -75,15 +73,23 @@ export default {
     methods: {
         abrirModal(tarefa) {
             this.tarefaModal = tarefa;
+            this.dadosTarefaEditar = tarefa;
             this.$nextTick(() => {
                 this.bsModalInstance.show();
             });
         },
 
-        async editarTarefa(){
-            axios.put("http://localhost:3000/tasks/"+this.tarefaModal.id,{
-
-            })
+        editarTarefa() {
+            try {
+                axios.put("http://localhost:3000/tasks/" + this.tarefaModal.id, {
+                    id:this.tarefaModal.id,
+                    title: this.tarefaModal.title,
+                    description: this.tarefaModal.description,
+                    columnId: this.tarefaModal.columnId
+                })
+            } catch (erro) {
+                console.log("Erro ao editar cadastro:" + this.tarefaModal.id + ", erro:" + erro);
+            }
         }
     },
 };
@@ -109,7 +115,7 @@ p:hover {
     color: white;
 }
 
-label{
+label {
     overflow-x: hidden;
 }
 </style>
