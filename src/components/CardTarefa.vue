@@ -23,7 +23,8 @@
                         <div class="mb-3 row">
                             <label for="tituloTarefa" class="col-sm-2 col-form-label">Título:</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="tituloTarefa" v-model="dadosTarefaEditar.title">
+                                <input type="text" class="form-control" id="tituloTarefa"
+                                    v-model="dadosTarefaEditar.title">
                             </div>
                         </div>
                         <!--Descricao da tarefa-->
@@ -39,7 +40,8 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Remover
                         </button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="editarTarefa()">Salvar</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            @click="editarTarefa()">Salvar</button>
                     </div>
                 </div>
             </div>
@@ -62,7 +64,7 @@ export default {
     data() {
         return {
             tarefaModal: {},
-            dadosTarefaEditar:{}
+            dadosTarefaEditar: {}
         };
     },
 
@@ -73,7 +75,8 @@ export default {
     methods: {
         abrirModal(tarefa) {
             this.tarefaModal = tarefa;
-            this.dadosTarefaEditar = tarefa;
+            this.dadosTarefaEditar = { ...tarefa };//copia do obj tarefa
+            //para nao mudar o input ao digitar, e quando sair do modal, el manter o valor sem clicar em salvar
             this.$nextTick(() => {
                 this.bsModalInstance.show();
             });
@@ -82,10 +85,14 @@ export default {
         editarTarefa() {
             try {
                 axios.put("http://localhost:3000/tasks/" + this.tarefaModal.id, {
-                    id:this.tarefaModal.id,
-                    title: this.tarefaModal.title,
-                    description: this.tarefaModal.description,
+                    id: this.tarefaModal.id,
+                    title: this.dadosTarefaEditar.title,
+                    description: this.dadosTarefaEditar.description,
                     columnId: this.tarefaModal.columnId
+                }).then(() => {
+                    //atualizando a coluna, para o valor da tag p mudar
+                    this.tarefaModal.title = this.dadosTarefaEditar.title;
+                    this.tarefaModal.description = this.dadosTarefaEditar.description;
                 })
             } catch (erro) {
                 console.log("Erro ao editar cadastro:" + this.tarefaModal.id + ", erro:" + erro);
