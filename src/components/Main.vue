@@ -3,9 +3,8 @@
         <section class="painel d-flex p-4 mt-4 rounded row">
             <cardTarefa v-for="coluna in colunas" :key="coluna.id"
             :titulo="coluna.title"
-            :tarefas="pegarTarefas(coluna.id)"
+            :tarefas="tarefas.filter(tarefa => tarefa.columnId == coluna.id)"
             />
-
         </section>
     </main>
 </template>
@@ -54,17 +53,6 @@ export default {
                 console.log("Erro ao carregas os dados: "+erro);
             }
         },
-
-        pegarTarefas(idColuna){
-            let tarefasDaColuna = [];
-
-            for(let i=0;i<this.tarefas.length;i++){
-                if(this.tarefas[i].columnId==idColuna){
-                    tarefasDaColuna.push(this.tarefas[i]);
-                }
-            }
-            return tarefasDaColuna;
-        }
     },
 
     mounted(){
