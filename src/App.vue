@@ -1,7 +1,7 @@
 <template>
   <div>
-      <Header/>
-      <Main/>
+      <Header @adicionar="chamarFuncaoMain"/>
+      <Main ref="mainComponente"/>
   </div>
 </template>
 
@@ -13,6 +13,13 @@ export default{
   components:{
     Header,
     Main,
+  },
+
+  methods:{
+    chamarFuncaoMain(){
+      console.log("evento recebido no app.vue")
+      this.$refs.mainComponente.getDados();
+    },
   }
 }
 </script>

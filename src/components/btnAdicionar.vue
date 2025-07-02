@@ -69,8 +69,6 @@ export default {
 
         async adicionarTarefa() {
             try {
-                console.log(this.colunaSelecionada)
-
                 const tarefa = {
                     id: Math.floor(Math.random() * 1000),
                     title: this.tituloTarefa,
@@ -82,6 +80,8 @@ export default {
 
                 this.tituloTarefa = null;
                 this.descTarefa = null;
+
+                this.$emit('clicou');
             } catch (erro) {
                 console.log("Erro ao adicionar tarefa: " + e);
             }

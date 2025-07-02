@@ -1,19 +1,25 @@
 <template>
     <header class="d-flex justify-content-center p-2 border-bottom ">
         <h1>Painel de Tarefas</h1>
-        <btnAdicionar/>
+        <BtnAdicionar @clicou="emitirAdicionar"/>
     </header>
 </template>
 
 <script>
-import axios from 'axios'
-import btnAdicionar from './btnAdicionar.vue';
+import BtnAdicionar from './btnAdicionar.vue';
 
 export default {
     name: "Header",
 
     components:{
-        btnAdicionar
+        BtnAdicionar
+    },
+
+    methods:{
+        emitirAdicionar(){
+            console.log('Evento clicou recebido no Header!');
+            this.$emit('adicionar');
+        }
     }
 }
 </script>
