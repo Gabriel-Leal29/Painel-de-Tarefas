@@ -6,7 +6,6 @@
             {{ tarefa.title }}
         </p>
 
-
         <!-- MODAL -->
         <div class="modal fade" id="ModalTarefa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
             ref="modalTarefa">
@@ -37,11 +36,12 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Remover
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            @click="deletarTarefa()">
+                            Deletar
                         </button>
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                            @click="editarTarefa()">Salvar</button>
+                            @click="editarTarefa()">Editar Tarefa</button>
                     </div>
                 </div>
             </div>
@@ -50,6 +50,10 @@
 </template>
 
 <script>
+//FAZER
+//COLOCAR LARGURA IGUAL NOS CARDS, ATUALIZAR OS CARDS AO CLICAR EM ADICIONAR
+
+
 import axios from "axios"
 import { Modal } from "bootstrap";
 
@@ -82,6 +86,20 @@ export default {
             });
         },
 
+        deletarTarefa() {
+            try {
+                axios.delete("http://localhost:3000/tasks/" + this.tarefaModal.id)
+                    .then(resposta => {
+                        console.log("Deletado com sucesso!", resposta.data);
+
+                        //falta atualizando a coluna, para o valor da tag p mudar
+                        window.location.reload();
+                    })
+            } catch (erro) {
+                console.log("Erro ao deletar a tarefa:" + this.tarefaModal.id + ", erro:" + erro);
+            }
+        },
+
         editarTarefa() {
             try {
                 axios.put("http://localhost:3000/tasks/" + this.tarefaModal.id, {
@@ -95,9 +113,9 @@ export default {
                     this.tarefaModal.description = this.dadosTarefaEditar.description;
                 })
             } catch (erro) {
-                console.log("Erro ao editar cadastro:" + this.tarefaModal.id + ", erro:" + erro);
+                console.log("Erro ao editar a tarefa:" + this.tarefaModal.id + ", erro:" + erro);
             }
-        }
+        },
     },
 };
 </script>
