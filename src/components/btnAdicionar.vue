@@ -1,6 +1,7 @@
 <template>
     <div>
-        <button class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#exampleModal">+</button>
+        <button @click="getNomesColunas()" class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Adicionar Tarefa</button>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -86,10 +87,6 @@ export default {
                 console.log("Erro ao adicionar tarefa: " + e);
             }
         },
-    },
-
-    mounted() {
-        this.getNomesColunas();
     },
 
 
