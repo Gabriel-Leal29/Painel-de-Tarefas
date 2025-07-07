@@ -88,13 +88,9 @@ export default {
 
         deletarTarefa() {
             try {
-                axios.delete("http://localhost:3000/tasks/" + this.tarefaModal.id)
-                    .then(resposta => {
-                        console.log("Deletado com sucesso!", resposta.data);
-
-                        //falta atualizando a coluna, para o valor da tag p mudar
-                        window.location.reload();
-                    })
+                console.log("testedelete id: "+this.tarefaModal.id)
+                axios.delete("http://localhost:3000/tasks/" + this.tarefaModal.id);
+                this.$emit('tarefaDeletada');
             } catch (erro) {
                 console.log("Erro ao deletar a tarefa:" + this.tarefaModal.id + ", erro:" + erro);
             }

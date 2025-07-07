@@ -15,22 +15,10 @@
   ],
   "tasks": [
     {
-      "id": "4",
-      "title": "Testar integração com json-server",
-      "description": "Fazer requisições GET e POST com Axioswd",
-      "columnId": 3
-    },
-    {
       "id": "665",
       "title": "testeeee",
       "description": "adwdwad",
       "columnId": null
-    },
-    {
-      "id": "613",
-      "title": "tarefa 2 editada por mim",
-      "description": "desc tarefa 2",
-      "columnId": 3
     },
     {
       "id": "225",
@@ -48,103 +36,55 @@
       "description": "aaaaaaaaa"
     },
     {
-      "id": "905",
-      "title": "A fazer",
-      "description": "desc A fazer",
-      "columnId": 1
-    },
-    {
-      "id": "626",
-      "title": "comer o cu do lukinha",
-      "description": "adwdawdw",
-      "columnId": 1
-    },
-    {
-      "id": "351",
-      "title": "fazendo",
-      "description": "dwdw",
-      "columnId": 1
-    },
-    {
-      "id": "779",
-      "title": "fazendo vdd",
-      "description": "dvd",
-      "columnId": 1
-    },
-    {
-      "id": "750",
-      "title": "teste",
-      "description": "faze",
-      "columnId": 1
-    },
-    {
-      "id": "546",
-      "title": "concluido",
-      "description": "aaaaaaaa",
-      "columnId": 1
-    },
-    {
       "id": "721",
       "title": "concluido",
       "description": "23123",
       "columnId": 1
     },
     {
-      "id": "543",
-      "title": "concluido vdd",
-      "description": "vdd",
-      "columnId": 3
-    },
-    {
-      "id": "145",
-      "title": "concluido de vdd 3",
-      "description": "adsdadsd",
-      "columnId": 3
-    },
-    {
-      "id": 170,
+      "id": "170",
       "title": "teste notbook",
       "description": "des notebook",
       "columnId": "2"
     },
     {
-      "id": 103,
+      "id": "103",
       "title": "teste add",
       "description": "add",
       "columnId": "2"
     },
     {
-      "id": 114,
+      "id": "114",
       "title": "eded",
       "description": "eded",
       "columnId": "2"
     },
     {
-      "id": 113,
+      "id": "113",
       "title": "testtt",
       "description": "eed",
       "columnId": "2"
     },
     {
-      "id": 998,
+      "id": "998",
       "title": "1",
       "description": "1",
       "columnId": "1"
     },
     {
-      "id": 999,
+      "id": "999",
       "title": "2",
       "description": "2",
       "columnId": "2"
     },
     {
-      "id": 283,
+      "id": "283",
       "title": "3",
       "description": "3",
       "columnId": "2"
     },
     {
-      "id": 408,
+      "id": "408",
       "title": "4",
       "description": "3",
       "columnId": "2"

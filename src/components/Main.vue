@@ -4,6 +4,7 @@
             <cardTarefa v-for="coluna in colunas" :key="coluna.id"
             :titulo="coluna.title"
             :tarefas="tarefas.filter(tarefa => tarefa.columnId == coluna.id)"
+            @tarefaDeletada="getDados"
             />
         </section>
     </main>
@@ -49,7 +50,6 @@ export default {
 
                 const tarefas = await axios.get("http://localhost:3000/tasks");
                 this.tarefas = tarefas.data;
-                console.log('tarefas atualizadas:', this.tarefas);
             }catch(erro){
                 console.log("Erro ao carregas os dados: "+erro);
             }
