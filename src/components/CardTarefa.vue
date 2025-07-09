@@ -1,12 +1,17 @@
 <template>
     <section class="principal text-center rounded col-auto">
-        <h2>{{ titulo }}</h2>
+                <!-- :data-bs-target -> para puxar o id de cada modal diferente puxado por componetne CardTarefa-->
+        <h2 data-bs-toggle="modal" :data-bs-target="'#modalColuna'+idColuna" class="p-1 rounded">
 
-        <p class="border border-1 rounded p-2" v-for="tarefa in tarefas" :key="tarefa.id" @click="abrirModal(tarefa)">
+            {{ titulo }}
+
+        </h2>
+
+        <p class="border border-1 rounded p-2 pTarefas" v-for="tarefa in tarefas" :key="tarefa.id" @click="abrirModal(tarefa)">
             {{ tarefa.title }}
         </p>
 
-        <!-- MODAL -->
+        <!-- modal das tarefas -->
         <div class="modal fade" id="ModalTarefa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
             ref="modalTarefa">
             <div class="modal-dialog modal-dialog-centered">
@@ -46,6 +51,30 @@
                 </div>
             </div>
         </div>
+
+        <!--modal das Colunas-->
+        <!-- :id -> para puxar o id de cada modal diferente puxado por componetne CardTarefa-->
+         <div class="modal fade" :id="'modalColuna'+idColuna" tabindex="-1" role="dialog" aria-labelledby="modalColunaLabel"
+            aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Excluir Coluna</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                            
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Deseja excluir a coluna : <b>"{{ titulo }}"</b>?</p>
+                        <p class="alert alert-danger">Todas as tarefas presentes dentro da coluna, serão deletadas com ela!</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="deletarColuna()">Deletar Coluna</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
 
@@ -63,6 +92,7 @@ export default {
     props: {
         titulo: String,
         tarefas: Array,
+        idColuna: String
     },
 
     data() {
@@ -86,10 +116,9 @@ export default {
             });
         },
 
-        deletarTarefa() {
+        async deletarTarefa() {
             try {
-                console.log("testedelete id: "+this.tarefaModal.id)
-                axios.delete("http://localhost:3000/tasks/" + this.tarefaModal.id);
+                await axios.delete("http://localhost:3000/tasks/" + this.tarefaModal.id);
                 this.$emit('tarefaDeletada');
             } catch (erro) {
                 console.log("Erro ao deletar a tarefa:" + this.tarefaModal.id + ", erro:" + erro);
@@ -112,6 +141,17 @@ export default {
                 console.log("Erro ao editar a tarefa:" + this.tarefaModal.id + ", erro:" + erro);
             }
         },
+
+        //DELETAR A COLUNA COM AS TAREFAS DENTRO
+        async deletarColuna() {
+            try {
+                await axios.delete("http://localhost:3000/columns/" + this.idColuna);
+                this.$emit('colunaDeletada');
+                //emit para o main.vue atualizar os dados
+            } catch (erro) {
+                console.log("Erro ao deletar a coluna, erro:" + erro);
+            }
+        }
     },
 };
 </script>
@@ -126,14 +166,15 @@ h2 {
     border-bottom: 2px solid rgb(180, 178, 178);
 }
 
-p {
+.pTarefas, h2 {
     transition: 0.5s;
     cursor: pointer;
 }
 
-p:hover {
+.pTarefas:hover, h2:hover {
     background: rgb(56, 55, 55);
     color: white;
+    border-bottom: 2px solid rgb(56, 55, 55);
 }
 
 label {

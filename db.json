@@ -1,26 +1,5 @@
 {
-  "columns": [
-    {
-      "id": "1",
-      "title": "A Fazer"
-    },
-    {
-      "id": "2",
-      "title": "Fazendo"
-    },
-    {
-      "id": "3",
-      "title": "Concluído"
-    },
-    {
-      "id": "4",
-      "title": "coluna nova"
-    },
-    {
-      "id": "5",
-      "title": "ttttwdwd"
-    }
-  ],
+  "columns": [],
   "tasks": [
     {
       "id": "721",
@@ -32,49 +11,43 @@
       "id": "170",
       "title": "teste notbook",
       "description": "des notebook",
-      "columnId": "2"
+      "columnId": null
     },
     {
-      "id": 303,
+      "id": "303",
       "title": "esse msm",
       "description": "123",
-      "columnId": "1"
+      "columnId": null
     },
     {
-      "id": 281,
+      "id": "281",
       "title": "test",
       "description": "12323",
-      "columnId": "1"
+      "columnId": null
     },
     {
-      "id": 815,
+      "id": "815",
       "title": "32",
       "description": "321",
-      "columnId": "1"
+      "columnId": null
     },
     {
-      "id": 176,
+      "id": "176",
       "title": "123",
       "description": "123",
-      "columnId": "1"
+      "columnId": null
     },
     {
-      "id": 598,
+      "id": "598",
       "title": "ttt",
       "description": "tttt",
-      "columnId": "3"
+      "columnId": null
     },
     {
-      "id": 320,
+      "id": "320",
       "title": "column 2",
       "description": "2",
-      "columnId": "2"
-    },
-    {
-      "id": 502,
-      "title": "new column",
-      "description": "adwad",
-      "columnId": "4"
+      "columnId": null
     }
   ]
 }

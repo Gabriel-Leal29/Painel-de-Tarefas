@@ -3,8 +3,10 @@
         <section class="painel d-flex p-4 mt-4 rounded row">
             <cardTarefa v-for="coluna in colunas" :key="coluna.id"
             :titulo="coluna.title"
+            :idColuna="coluna.id"
             :tarefas="tarefas.filter(tarefa => tarefa.columnId == coluna.id)"
             @tarefaDeletada="getDados"
+            @colunaDeletada="getDados"
             />
         </section>
     </main>
