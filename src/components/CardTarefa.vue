@@ -1,13 +1,14 @@
 <template>
     <section class="principal text-center rounded col-auto">
-                <!-- :data-bs-target -> para puxar o id de cada modal diferente puxado por componetne CardTarefa-->
-        <h2 data-bs-toggle="modal" :data-bs-target="'#modalColuna'+idColuna" class="p-1 rounded">
+        <!-- :data-bs-target -> para puxar o id de cada modal diferente puxado por componetne CardTarefa-->
+        <h2 data-bs-toggle="modal" :data-bs-target="'#modalColuna' + idColuna" class="p-1 rounded">
 
             {{ titulo }}
 
         </h2>
 
-        <p class="border border-1 rounded p-2 pTarefas" v-for="tarefa in tarefas" :key="tarefa.id" @click="abrirModal(tarefa)">
+        <p class="border border-1 rounded p-2 pTarefas" v-for="tarefa in tarefas" :key="tarefa.id"
+            @click="abrirModal(tarefa)">
             {{ tarefa.title }}
         </p>
 
@@ -42,7 +43,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
-                            @click="deletarTarefa()">
+                            @click="deletarTarefa(this.dadosTarefaEditar.id)">
                             Deletar
                         </button>
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
@@ -54,23 +55,25 @@
 
         <!--modal das Colunas-->
         <!-- :id -> para puxar o id de cada modal diferente puxado por componetne CardTarefa-->
-         <div class="modal fade" :id="'modalColuna'+idColuna" tabindex="-1" role="dialog" aria-labelledby="modalColunaLabel"
-            aria-hidden="true">
+        <div class="modal fade" :id="'modalColuna' + idColuna" tabindex="-1" role="dialog"
+            aria-labelledby="modalColunaLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Excluir Coluna</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                            
+
                         </button>
                     </div>
                     <div class="modal-body">
                         <p>Deseja excluir a coluna : <b>"{{ titulo }}"</b>?</p>
-                        <p class="alert alert-danger">Todas as tarefas presentes dentro da coluna, serão deletadas com ela!</p>
+                        <p class="alert alert-danger">Todas as tarefas presentes dentro da coluna, serão deletadas com
+                            ela!</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" @click="deletarColuna()">Deletar Coluna</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                            @click="deletarColuna()">Deletar Coluna</button>
                     </div>
                 </div>
             </div>
@@ -98,7 +101,8 @@ export default {
     data() {
         return {
             tarefaModal: {},
-            dadosTarefaEditar: {}
+            dadosTarefaEditar: {},
+
         };
     },
 
@@ -116,18 +120,9 @@ export default {
             });
         },
 
-        async deletarTarefa() {
-            try {
-                await axios.delete("http://localhost:3000/tasks/" + this.tarefaModal.id);
-                this.$emit('tarefaDeletada');
-            } catch (erro) {
-                console.log("Erro ao deletar a tarefa:" + this.tarefaModal.id + ", erro:" + erro);
-            }
-        },
-
         editarTarefa() {
             try {
-                axios.put("http://localhost:3000/tasks/" + this.tarefaModal.id, {
+                axios.put(`http://localhost:3000/tasks/${this.tarefaModal.id}` + {
                     id: this.tarefaModal.id,
                     title: this.dadosTarefaEditar.title,
                     description: this.dadosTarefaEditar.description,
@@ -142,16 +137,19 @@ export default {
             }
         },
 
-        //DELETAR A COLUNA COM AS TAREFAS DENTRO
-        async deletarColuna() {
+        async deletarTarefa(id) {
             try {
-                await axios.delete("http://localhost:3000/columns/" + this.idColuna);
-                this.$emit('colunaDeletada');
-                //emit para o main.vue atualizar os dados
+                const idStr = String(id);    // garante que id é string
+                await axios.delete(`http://localhost:3000/tasks/${idStr}`);
+                this.$emit('tarefaDeletada');
             } catch (erro) {
-                console.log("Erro ao deletar a coluna, erro:" + erro);
+                console.log("Erro ao deletar a tarefa:", erro);
             }
         }
+        ,
+
+        //DELETAR A COLUNA COM AS TAREFAS DENTRO
+
     },
 };
 </script>
@@ -166,12 +164,14 @@ h2 {
     border-bottom: 2px solid rgb(180, 178, 178);
 }
 
-.pTarefas, h2 {
+.pTarefas,
+h2 {
     transition: 0.5s;
     cursor: pointer;
 }
 
-.pTarefas:hover, h2:hover {
+.pTarefas:hover,
+h2:hover {
     background: rgb(56, 55, 55);
     color: white;
     border-bottom: 2px solid rgb(56, 55, 55);

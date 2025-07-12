@@ -1,6 +1,7 @@
 <template>
     <div>
-        <button @click="getNomesColunas()" class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <button @click="getNomesColunas()" class="btn btn-primary ms-5" data-bs-toggle="modal"
+            data-bs-target="#exampleModal">
             Adicionar Tarefa</button>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -71,11 +72,11 @@ export default {
         async adicionarTarefa() {
             try {
                 const tarefa = {
-                    id: Math.floor(Math.random() * 1000),
+                    id: String(Math.floor(Math.random() * 10000)),    // id como string
                     title: this.tituloTarefa,
                     description: this.descTarefa,
-                    columnId: this.colunaSelecionada.id
-                }
+                    columnId: String(this.colunaSelecionada.id)       // columnId como string
+                };
 
                 await axios.post('http://localhost:3000/tasks', tarefa);
 
@@ -84,9 +85,11 @@ export default {
 
                 this.$emit('clicou');
             } catch (erro) {
-                console.log("Erro ao adicionar tarefa: " + e);
+                console.log("Erro ao adicionar tarefa:", erro);
             }
-        },
+        }
+
+        ,
     },
 
 
