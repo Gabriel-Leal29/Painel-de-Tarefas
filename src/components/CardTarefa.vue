@@ -139,7 +139,7 @@ export default {
 
         async deletarTarefa(id) {
             try {
-                const idStr = String(id);    // garante que id é string
+                const idStr = String(id);    //garante que id é string
                 await axios.delete(`http://localhost:3000/tasks/${idStr}`);
                 this.$emit('tarefaDeletada');
             } catch (erro) {
@@ -149,6 +149,18 @@ export default {
         ,
 
         //DELETAR A COLUNA COM AS TAREFAS DENTRO
+
+        async deletarColuna() {
+            try {
+                for (const tarefa of this.tarefas) {
+                    await this.deletarTarefa(tarefa.id);
+                }
+                await axios.delete(`http://localhost:3000/columns/${this.idColuna}`);
+                this.$emit('colunaDeletada')
+            } catch (erro) {
+                console.log("Erro ao deletar a coluna!")
+            }
+        },
 
     },
 };
