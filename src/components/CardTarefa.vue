@@ -120,18 +120,18 @@ export default {
             });
         },
 
-        editarTarefa() {
+        async editarTarefa() {
             try {
-                axios.put(`http://localhost:3000/tasks/${this.tarefaModal.id}` + {
+                await axios.put(`http://localhost:3000/tasks/${this.tarefaModal.id}`, {
                     id: this.tarefaModal.id,
                     title: this.dadosTarefaEditar.title,
                     description: this.dadosTarefaEditar.description,
                     columnId: this.tarefaModal.columnId
-                }).then(() => {
-                    //atualizando a coluna, para o valor da tag p mudar
-                    this.tarefaModal.title = this.dadosTarefaEditar.title;
-                    this.tarefaModal.description = this.dadosTarefaEditar.description;
-                })
+                });
+
+                //atualizando a coluna, para o valor da tag p mudar
+                this.tarefaModal.title = this.dadosTarefaEditar.title;
+                this.tarefaModal.description = this.dadosTarefaEditar.description;
             } catch (erro) {
                 console.log("Erro ao editar a tarefa:" + this.tarefaModal.id + ", erro:" + erro);
             }

@@ -5,18 +5,5 @@
       "title": "Fazendo"
     }
   ],
-  "tasks": [
-    {
-      "id": "3116",
-      "title": "teste",
-      "description": "",
-      "columnId": "1"
-    },
-    {
-      "id": "2072",
-      "title": "123",
-      "description": "",
-      "columnId": "1"
-    }
-  ]
+  "tasks": []
 }
