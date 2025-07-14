@@ -7,6 +7,7 @@
             :tarefas="tarefas.filter(tarefa => tarefa.columnId == coluna.id)"
             @tarefaDeletada="getDados"
             @colunaDeletada="getDados"
+            @tarefaMovida="getDados"
             />
         </section>
     </main>

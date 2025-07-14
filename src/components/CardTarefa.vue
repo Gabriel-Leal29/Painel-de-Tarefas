@@ -9,7 +9,7 @@
 
         <div @dragover.prevent @drop="onDrop" class="tarefas h-100">
             <p class="border border-1 rounded p-2 pTarefas" v-for="tarefa in tarefas" :key="tarefa.id"
-                @click="abrirModal(tarefa)" draggable="true" @dragstart="onDragStart(tarefa)">
+                @click="abrirModal(tarefa)" draggable="true" @dragstart="onDragStart(tarefa,$event)">
                 {{ tarefa.title }}
             </p>
         </div>
@@ -107,7 +107,6 @@ export default {
         return {
             tarefaModal: {},
             dadosTarefaEditar: {},
-
         };
     },
 
@@ -165,12 +164,24 @@ export default {
 
         onDragStart(tarefa, event) {
             //envia o id da tarefa
-            event.dataTransfer.setData('text/plain', tarefa.id)
+            event.dataTransfer.setData('text/plain', tarefa.id);
         },
-        onDrop(event) {
+
+        async onDrop(event) {
             //solta a tarfa do id
             const tarefaId = event.dataTransfer.getData('text/plain');
             console.log('Tarefa solta:', tarefaId);
+
+            try {
+                await axios.patch(`http://localhost:3000/tasks/${tarefaId}`, {
+                    columnId: this.idColuna
+                });
+
+                this.$emit('tarefaMovida');
+            } catch (erro) {
+                console.log("Erro ao mover a coluna: ", erro)
+            }
+
 
             // Aqui você faz a atualização do columnId via Axios ou emit pro pai
             // Exemplo: this.$emit('moverTarefa', { tarefaId, novaColunaId: this.idColuna })
