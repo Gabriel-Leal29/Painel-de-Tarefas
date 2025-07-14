@@ -7,10 +7,14 @@
 
         </h2>
 
-        <p class="border border-1 rounded p-2 pTarefas" v-for="tarefa in tarefas" :key="tarefa.id"
-            @click="abrirModal(tarefa)">
-            {{ tarefa.title }}
-        </p>
+        <div @dragover.prevent @drop="onDrop" class="tarefas h-100">
+            <p class="border border-1 rounded p-2 pTarefas" v-for="tarefa in tarefas" :key="tarefa.id"
+                @click="abrirModal(tarefa)" draggable="true" @dragstart="onDragStart(tarefa)">
+                {{ tarefa.title }}
+            </p>
+        </div>
+
+
 
         <!-- modal das tarefas -->
         <div class="modal fade" id="ModalTarefa" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
@@ -88,6 +92,7 @@
 
 import axios from "axios"
 import { Modal } from "bootstrap";
+import draggable from 'vuedraggable'
 
 export default {
     name: "CardTarefa",
@@ -145,11 +150,7 @@ export default {
             } catch (erro) {
                 console.log("Erro ao deletar a tarefa:", erro);
             }
-        }
-        ,
-
-        //DELETAR A COLUNA COM AS TAREFAS DENTRO
-
+        },
         async deletarColuna() {
             try {
                 for (const tarefa of this.tarefas) {
@@ -160,6 +161,19 @@ export default {
             } catch (erro) {
                 console.log("Erro ao deletar a coluna!")
             }
+        },
+
+        onDragStart(tarefa, event) {
+            //envia o id da tarefa
+            event.dataTransfer.setData('text/plain', tarefa.id)
+        },
+        onDrop(event) {
+            //solta a tarfa do id
+            const tarefaId = event.dataTransfer.getData('text/plain');
+            console.log('Tarefa solta:', tarefaId);
+
+            // Aqui você faz a atualização do columnId via Axios ou emit pro pai
+            // Exemplo: this.$emit('moverTarefa', { tarefaId, novaColunaId: this.idColuna })
         },
 
     },
