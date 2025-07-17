@@ -1,6 +1,6 @@
 <template>
     <main class="d-flex justify-content-center">
-        <section class="painel d-flex p-4 mt-4 rounded row">
+        <section class="painel row p-4 mt-2 mb-2 rounded">
             <cardTarefa v-for="coluna in colunas" :key="coluna.id"
             :titulo="coluna.title"
             :idColuna="coluna.id"
@@ -8,22 +8,22 @@
             @tarefaDeletada="getDados"
             @colunaDeletada="getDados"
             @tarefaMovida="getDados"
+            class="col-md-auto"
             />
         </section>
     </main>
 </template>
 
-<style>
+<style scoped>
 main {
-    background: #D3D3D3;
+    background: #1e1e2f;
     height: 100vh;
 }
 
 .painel {
-    background: white;
+    background: #2c2c3e;
     gap: 40px;
-    width: 80%;
-    height: 80%;
+    max-height: 90%;
 }
 </style>
 

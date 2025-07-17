@@ -1,11 +1,11 @@
 <template>
     <div>
-        <button @click="getNomesColunas()" class="btn btn-primary ms-5" data-bs-toggle="modal"
+        <button @click="getNomesColunas()" class="configButton" data-bs-toggle="modal"
             data-bs-target="#exampleModal">
             Adicionar Tarefa</button>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">Adicionar Tarefa</h1>
@@ -31,8 +31,8 @@
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <button type="button" class="btn btn-primary" @click="adicionarTarefa()"
+                        <button type="button" class="configButton" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="button" class="configButton" @click="adicionarTarefa()"
                             data-bs-dismiss="modal">Adicionar</button>
                     </div>
                 </div>
@@ -40,6 +40,12 @@
         </div>
     </div>
 </template>
+
+<style scoped>
+.modal-body, .modal-header, .modal-footer{
+  background: #1e1e2f;
+}
+</style>
 
 <script>
 import axios from 'axios'
