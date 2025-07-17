@@ -92,7 +92,6 @@
 
 import axios from "axios"
 import { Modal } from "bootstrap";
-import draggable from 'vuedraggable'
 
 export default {
     name: "CardTarefa",
@@ -170,7 +169,6 @@ export default {
         async onDrop(event) {
             //solta a tarfa do id
             const tarefaId = event.dataTransfer.getData('text/plain');
-            console.log('Tarefa solta:', tarefaId);
 
             try {
                 await axios.patch(`http://localhost:3000/tasks/${tarefaId}`, {
@@ -181,11 +179,13 @@ export default {
             } catch (erro) {
                 console.log("Erro ao mover a coluna: ", erro)
             }
-
-
-            // Aqui você faz a atualização do columnId via Axios ou emit pro pai
-            // Exemplo: this.$emit('moverTarefa', { tarefaId, novaColunaId: this.idColuna })
         },
+
+        onDragStartColuna(event) {
+        //envia o id da coluna
+        event.dataTransfer.setData('text/plain', this.idColuna);
+        event.dataTransfer.effectAllowed = 'move';
+    },
 
     },
 };
