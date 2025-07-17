@@ -1,7 +1,7 @@
 <template>
   <div>
-      <Header @adicionar="chamarFuncaoMain"/>
-      <Main ref="mainComponente"/>
+    <Header @adicionar="chamarFuncaoMain" />
+    <Main ref="mainComponente" />
   </div>
 </template>
 
@@ -9,14 +9,14 @@
 import Header from "./components/Header.vue";
 import Main from "./components/Main.vue";
 
-export default{
-  components:{
+export default {
+  components: {
     Header,
     Main,
   },
 
-  methods:{
-    chamarFuncaoMain(){
+  methods: {
+    chamarFuncaoMain() {
       console.log("evento recebido no app.vue")
       this.$refs.mainComponente.getDados();
     },
@@ -25,15 +25,22 @@ export default{
 </script>
 
 <style>
-*{
-  margin:0;
+* {
+  margin: 0;
   box-sizing: border-box;
   padding: 0;
   overflow-y: hidden;
+  font-family: "Rubik", sans-serif;
 }
 
-p,h1,h2,button,label, .modal-title,header{
-    color: #f1f1f1;
+p,
+h1,
+h2,
+button,
+label,
+.modal-title,
+header {
+  color: #f1f1f1;
 }
 
 .configButton {
@@ -43,11 +50,11 @@ p,h1,h2,button,label, .modal-title,header{
   background: #6366f1;
 }
 
-option{
-  color:black;
+option {
+  color: black;
 }
 
-.modal{
-    backdrop-filter: blur(3px);
+.modal {
+  backdrop-filter: blur(3px);
 }
 </style>

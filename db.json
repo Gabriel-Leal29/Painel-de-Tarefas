@@ -2,23 +2,16 @@
   "columns": [
     {
       "id": "1",
-      "title": "Fazendo"
+      "title": "Pendentes"
     },
     {
       "id": "2",
-      "title": "teste"
+      "title": "Em Progresso"
     },
     {
       "id": "3",
       "title": "Concluído"
     }
   ],
-  "tasks": [
-    {
-      "id": "9640",
-      "title": "jgvjgv",
-      "description": null,
-      "columnId": "1"
-    }
-  ]
+  "tasks": []
 }

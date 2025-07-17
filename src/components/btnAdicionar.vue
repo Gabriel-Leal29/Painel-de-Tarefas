@@ -1,7 +1,6 @@
 <template>
     <div>
-        <button @click="getNomesColunas()" class="configButton" data-bs-toggle="modal"
-            data-bs-target="#exampleModal">
+        <button @click="getNomesColunas()" class="configButton" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Adicionar Tarefa</button>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -16,14 +15,23 @@
                             <div class="col-auto">
                                 <label for="titulo" class="col-form-label">Título da Tarefa:</label>
                             </div>
-                            <div class="col-auto">
+                            <div class="col">
                                 <input type="text" id="titulo" class="form-control" v-model="tituloTarefa">
                             </div>
                         </div>
-                        <label for="nome" class="form-label">Descrição:</label>
-                        <input type="text" class="form-control" id="nome" aria-describedby="emailHelp"
-                            v-model="descTarefa">
-                        <label for="select">Selecione a coluna:</label>
+
+                        <div class="row mt-2">
+                            <div class="col-auto">
+                                <label for="nome" class="col-form-label">Descrição:</label>
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" id="nome" aria-describedby="emailHelp"
+                                    v-model="descTarefa">
+                            </div>
+                        </div>
+
+
+                        <label for="select" class="">Selecione a coluna:</label>
                         <select name="select" class="form-select" v-model="colunaSelecionada">
                             <option :value="coluna" v-for="(coluna, id) in NomesColunas" :key="id">{{ coluna.title }}
                             </option>
@@ -42,8 +50,10 @@
 </template>
 
 <style scoped>
-.modal-body, .modal-header, .modal-footer{
-  background: #1e1e2f;
+.modal-body,
+.modal-header,
+.modal-footer {
+    background: #1e1e2f;
 }
 </style>
 
