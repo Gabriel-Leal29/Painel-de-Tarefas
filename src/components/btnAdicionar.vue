@@ -46,6 +46,24 @@
                 </div>
             </div>
         </div>
+
+        
+        <div class="modal fade" ref="modalAviso" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5">Aviso</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <Mensagem :texto="texto" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="configButton" data-bs-dismiss="modal">Fechar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -59,9 +77,15 @@
 
 <script>
 import axios from 'axios'
+import * as bootstrap from 'bootstrap';
+import Mensagem from './Mensagem.vue'
 
 export default {
     name: "btnAdicionar",
+
+    components:{
+        Mensagem
+    },
 
     data() {
         return {
@@ -69,6 +93,7 @@ export default {
             tituloTarefa: "",
             descTarefa: "",
             colunaSelecionada: null,
+            texto:null,
         }
     },
 
@@ -88,20 +113,23 @@ export default {
         async adicionarTarefa() {
             try {
                 const tarefa = {
-                    id: String(Math.floor(Math.random() * 10000)),    // id como string
+                    id: String(Math.floor(Math.random() * 10000)),//id como string
                     title: this.tituloTarefa,
                     description: this.descTarefa,
-                    columnId: String(this.colunaSelecionada.id)       // columnId como string
+                    columnId: String(this.colunaSelecionada.id) //columnId como string
                 };
 
                 await axios.post('http://localhost:3000/tasks', tarefa);
 
                 this.tituloTarefa = null;
                 this.descTarefa = null;
-
                 this.$emit('clicou');
             } catch (erro) {
-                console.log("Erro ao adicionar tarefa:", erro);
+                this.texto = "Erro ao adicionar tarefa: " + erro;
+                this.$nextTick(() => {
+                    let modal = new bootstrap.Modal(this.$refs.modalAviso);
+                    modal.show();
+                });
             }
         }
 
